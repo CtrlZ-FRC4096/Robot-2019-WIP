@@ -117,6 +117,11 @@ class Robot(wpilib.TimedRobot):
 		# NetworkTables
 		self.nt_robot = networktables.NetworkTables.getTable('Robot')
 
+		# cProfile object
+		if const.CPROFILE_ENABLED:
+			self.profiler = cProfile.Profile( )
+		else:
+			self.profiler = None
 
 	### DISABLED ###
 
@@ -125,6 +130,10 @@ class Robot(wpilib.TimedRobot):
 
 		# self.limelight.table.putNumber('stream',2)		# 0 = side-by-side, 1 = PIP Main, 2 = PIP Secondary
 		# self.limelight.set_driver_mode(const.DRIVER_CAMERA_MODE_DEFAULT)
+
+		if const.CPROFILE_ENABLED:
+			self.profiler.disable( )
+			self.profiler.dump_stats( 'profile.pstat' )
 
 	def disabledPeriodic(self):
 		pass
@@ -159,6 +168,10 @@ class Robot(wpilib.TimedRobot):
 		# Drive encoders
 		self.drive_encoder_left.reset()
 		self.drive_encoder_right.reset()
+
+		if const.CPROFILE_ENABLED:
+			self.profiler.enable( )
+
 
 	def teleopPeriodic(self):
 		# if self.driverstation.getMatchTime() < 30:

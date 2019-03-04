@@ -19,6 +19,7 @@ PDP = Power Distribution Panel
 
 ### CONSTANTS ###
 
+
 ## DRIVETRAIN ##
 
 # MOTORS - all Victor SPs #
@@ -168,3 +169,5 @@ CAN_PCM_A								= 1
 CAN_PCM_B								= 2
 
 CAN_PDP									= 0
+
+CPROFILE_ENABLED						= True
