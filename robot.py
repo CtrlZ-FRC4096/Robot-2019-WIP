@@ -8,6 +8,7 @@ contact@team4096.org
 """
 
 # Import our files
+import cProfile
 import logging
 import time
 
@@ -102,7 +103,7 @@ class Robot(wpilib.TimedRobot):
 		# self.pressure_timer_delay = 1.0		# times per second
 
 		# Time robot object was created
-		self.start_time = time.time()
+		# self.start_time = time.time()
 
 		## Scheduler ##
 		self.scheduler = wpilib.command.Scheduler.getInstance()
@@ -120,12 +121,13 @@ class Robot(wpilib.TimedRobot):
 	### DISABLED ###
 
 	def disabledInit(self):
-		wpilib.command.Scheduler.getInstance().removeAll()
+		self.scheduler.removeAll()
 
 		# self.limelight.table.putNumber('stream',2)		# 0 = side-by-side, 1 = PIP Main, 2 = PIP Secondary
 		# self.limelight.set_driver_mode(const.DRIVER_CAMERA_MODE_DEFAULT)
 
 	def disabledPeriodic(self):
+		pass
 		self.log()
 
 
@@ -141,12 +143,12 @@ class Robot(wpilib.TimedRobot):
 	### TELEOPERATED ###
 
 	def teleopInit(self):
-
 		wpilib.LiveWindow.disableAllTelemetry()
 		self.limelight.set_driver_mode(const.DRIVER_CAMERA_MODE_ENABLED)
 
 		# Removes any leftover commands from the scheduler
-		wpilib.command.Scheduler.getInstance().removeAll()
+		self.scheduler.removeAll()
+
 		self.climber.stop_back_axle()
 		self.climber.stop_front_axle()
 		self.climber.stop_drive_front_axle()
@@ -159,10 +161,10 @@ class Robot(wpilib.TimedRobot):
 		self.drive_encoder_right.reset()
 
 	def teleopPeriodic(self):
-		if self.driverstation.getMatchTime() < 30:
-			self.arduino.set_led_state('c')
+		# if self.driverstation.getMatchTime() < 30:
+		# 	self.arduino.set_led_state('c')
 
-		wpilib.command.Scheduler.getInstance().run()
+		self.scheduler.run()
 		self.log()
 
 
