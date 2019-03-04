@@ -170,4 +170,4 @@ CAN_PCM_B								= 2
 
 CAN_PDP									= 0
 
-CPROFILE_ENABLED						= True
+CPROFILE_ENABLED						= False

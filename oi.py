@@ -77,7 +77,7 @@ class OI:
 		# Set default commands
 		self.robot.drive.setDefaultCommand(self.drive_command)
 		self.robot.hatch.setDefaultCommand(self.hatch_command)
-		self.robot.cargo.setDefaultCommand(self.cargo_arm_command)
+		# self.robot.cargo.setDefaultCommand(self.cargo_arm_command)
 
 		# Controller 1: driver
 		self.driver1.POV.UP.whenActive(commands.climber.Auto_Stilts_Down(self.robot))

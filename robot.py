@@ -165,6 +165,8 @@ class Robot(wpilib.TimedRobot):
 		self.climber.stop_front_axle()
 		self.climber.stop_drive_front_axle()
 
+		self.cargo.stop_arm()
+
 		# Reset all robot parts
 		#self.gyro.reset()
 
