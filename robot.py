@@ -10,6 +10,7 @@ contact@team4096.org
 # Import our files
 import cProfile
 import logging
+import os
 import time
 
 import wpilib
@@ -133,7 +134,9 @@ class Robot(wpilib.TimedRobot):
 
 		if const.CPROFILE_ENABLED:
 			self.profiler.disable( )
-			self.profiler.dump_stats( 'profile.pstat' )
+			if os.path.exists('/var/tmp/profile.pstat'):
+				os.remove('/var/tmp/profile.pstat')
+			self.profiler.dump_stats( '/var/tmp/profile.pstat' )
 
 	def disabledPeriodic(self):
 		pass
